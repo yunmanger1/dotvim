@@ -22,7 +22,8 @@ Bundle 'mileszs/ack.vim'
 Bundle 'kien/ctrlp.vim'
 Bundle 'tpope/vim-repeat'
 Bundle 'altercation/vim-colors-solarized'
-Bundle 'klen/python-mode'
+" Bundle 'klen/python-mode'
+Bundle "terryma/vim-multiple-cursors"
 
 "this is the cconfiguration file for linux and mac systems
 "symlink this to your home folder as .vimrc 
