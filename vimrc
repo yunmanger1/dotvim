@@ -24,7 +24,14 @@ Bundle 'tpope/vim-repeat'
 Bundle 'altercation/vim-colors-solarized'
 " Bundle 'klen/python-mode'
 Bundle "terryma/vim-multiple-cursors"
-
+Bundle "scrooloose/syntastic"
+Bundle "vim-scripts/tComment"
+" Bundle "yegappan/mru"
+" Bundle "matchit.vim"
+" Bundle "gundo.vim"
+Bundle "ciaranm/detectindent"
+Bundle "tpope/vim-sensible"
+Bundle "davidhalter/jedi-vim"
 "this is the cconfiguration file for linux and mac systems
 "symlink this to your home folder as .vimrc 
 execute pathogen#infect()
@@ -92,7 +99,15 @@ set hlsearch
 " such, it may be a good idea to disable them and use the securemodelines
 set nomodeline
 
-
+" Syntactic
+let g:syntastic_enable_python_checker = 1
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_python_checkers = ['flake8']
+let g:syntastic_python_checker_args='--ignore=E501,E225'
+map <leader>n :lnext<CR>
+map <leader>N :lprev<CR>
+map <leader>mn :SyntasticCheck<CR>
+map <leader>nm :SyntasticReset<CR>
 "------------------------------------------------------------
 python from powerline.vim import setup as powerline_setup
 python powerline_setup()
@@ -161,16 +176,16 @@ set notimeout ttimeout ttimeoutlen=200
  
 " Indentation settings for using 2 spaces instead of tabs.
 " Do not change 'tabstop' from its default value of 8 with this setup.
-set shiftwidth=2
-set softtabstop=2
+set shiftwidth=4
+set softtabstop=4
 set expandtab
  
 set nowrap
  
 " Indentation settings for using hard tabs for indent. Display tabs as
 " two characters wide.
-set shiftwidth=2
-set tabstop=2
+set shiftwidth=4
+set tabstop=4
 
 "------------------------------------------------------------
 " Ignore these files when completing
@@ -178,7 +193,7 @@ set wildignore+=*.o,*.obj,.git,*.pyc
 set wildignore+=eggs/**
 set wildignore+=*.egg-info/**
 
-let mapleader = " "
+let mapleader = ","
 
 " Reload Vimrc
 map <silent> <leader>V :source ~/.vimrc<CR>:filetype detect<CR>:exe ":echo 'vimrc reloaded'"<CR>
@@ -206,7 +221,21 @@ map Y y$
 " Map <C-L> (redraw screen) to also turn off search highlighting until the
 " next search
 " nnoremap <C-L> :nohl<CR><C-L>
- 
+nnoremap th  :tabfirst<CR>
+nnoremap tj  :tabnext<CR>
+nnoremap tk  :tabprev<CR>
+nnoremap tl  :tablast<CR>
+nnoremap tt  :tabedit<Space>
+nnoremap tn  :tabnext<Space>
+nnoremap tm  :tabm<Space>
+nnoremap td  :tabclose<CR>
+" Alternatively use
+nnoremap th :tabnext<CR>
+nnoremap tl :tabprev<CR>
+nnoremap tn :tabnew<CR> 
+" each buffer in separate tab
+" :au BufAdd,BufNewFile * nested tab sball
+
 " NERDTree and buffer shorcuts
 nmap <F3> :bp<CR>
 nmap <F4> :bn<CR>
@@ -224,7 +253,8 @@ nmap <C-\> :NERDTreeToggle<CR>
 "nmap <Leader>tw :bd<CR>
 "nmap <leader>tb :tabfirst<CR>
 "nmap <leader>t" ctrlp.vim <F5><F5>shortcuts
-nmap <Leader><C-t> :CtrlP<CR>
+
+nmap <C-p> :CtrlP<CR>
 
 " Show syntax highlighting groups for word under cursor
 nmap <C-S-P> :call <SID>SynStack()<CR>
